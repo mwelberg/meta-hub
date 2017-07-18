@@ -2,7 +2,9 @@
 This repository contains a basic website powered by yii framework.
 Some implemented features are:
 * Registration and Login process
+
 Some future features are:
+
 * User profiles:
     * Changes to profile
     * Profile image upload
