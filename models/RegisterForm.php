@@ -30,7 +30,7 @@ class RegisterForm extends Model
       	    ['username', 'unique', 'targetClass' => '\app\models\BackendUser', 'message' => 'This username is already taken.'],
       	    // email address is by the 'unique' validator
       	    ['email', 'unique', 'targetClass' => '\app\models\BackendUser', 'message' => 'This address is already taken.'],
-      	    // passwords are validated by validatePassword()
+      	    // passwords are validated by this inline comparison
       	    ['password_repeat','compare','compareAttribute' => 'password'],
               ];
     }

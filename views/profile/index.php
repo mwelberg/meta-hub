@@ -4,33 +4,16 @@ use yii\helpers\Url;
 
 $this->title = 'Meta-Hub';
 ?>
-<div class="site-index">
+<div class="site-profile">
 
     <div class="jumbotron">
-        <h1>Welcome!</h1>
+        <h1><?php echo Yii::$app->user->identity->username;?></h1>
 
-        <p class="lead">This is the Meta-Hub of the Meta Meute.</p>
-
-        <p>
-          <?php
-            /**
-             * Bad style to have one button with two different functions bound to it
-             * should be changed, maybe redirect to profile page directly after login
-             */
-            $isGuest = Yii::$app->user->isGuest;
-            $dynamicLink = $isGuest ? Url::to(['/site/login']) : Url::to(['/profile']);
-            $dynamicText = $isGuest ? 'Login right here' : 'View your profile';
-            $result = '<a class="btn btn-lg btn-success" href="';
-            $result .= $dynamicLink;
-            $result .= '">';
-            $result .= $dynamicText;
-            $result .= '</a>';
-            echo $result;
-          ?>
-        </p>
+        <p class="lead"><?php echo Yii::$app->user->identity->description;?></p>
+        <p class="lead"><?php echo Yii::$app->user->identity->email;?></p>
     </div>
 
-    <div class="body-content">
+    <!--div class="body-content">
 
         <div class="row">
             <div class="col-lg-4">
@@ -65,5 +48,5 @@ $this->title = 'Meta-Hub';
             </div>
         </div>
 
-    </div>
+    </div-->
 </div>
