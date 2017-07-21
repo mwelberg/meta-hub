@@ -35,8 +35,13 @@ class ProfileController extends Controller
        $model = new ProfileForm();
        if ($model->load(Yii::$app->request->post()) && $model->validate())
        {
-         $model->save();
-         //TODO: Settings saced message
+         if($model->save()){
+           //Settings saved message
+           Yii::$app->session->setFlash('success', $value = 'Successfully saved the profile settings.', $removeAfterAccess = true);
+         }
+         else {
+           Yii::$app->session->setFlash('danger', $value = 'Error saving the profile settings.', $removeAfterAccess = true);
+         }
        }
 
        //if the above steps are not applied offer the registration form

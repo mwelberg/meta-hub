@@ -34,7 +34,9 @@ class ProfileForm extends Model
             //profile picture upload rule
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
             //restrict the description length to 65535 bytes
-            ['description', 'string', 'max' => 65535]
+            ['description', 'string', 'max' => 65535],
+            // password must have at least 8 characters
+            ['password', 'string', 'min' => 8],
               ];
     }
 

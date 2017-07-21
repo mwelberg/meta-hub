@@ -11,6 +11,11 @@ $this->title = 'Register';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-register">
+    <?php
+      foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+        echo '<div class="alert alert-'.$key.'">'.$message.'</div>';
+      }
+    ?>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Please fill out the following fields to register:</p>

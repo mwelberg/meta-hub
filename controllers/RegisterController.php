@@ -17,8 +17,14 @@ class RegisterController extends Controller
     $model = new RegisterForm();
     if ($model->load(Yii::$app->request->post()) && $model->validate())
     {
-      $model->register();
-      return $this->goBack();
+      if ($model->register()) {
+        Yii::$app->session->setFlash('success', $value = 'Successfully registered as a user. Welcome!', $removeAfterAccess = true);
+        return $this->redirect(['site/login']);
+      }
+      else {
+        Yii::$app->session->setFlash('danger', $value = 'An error occured while registrating.', $removeAfterAccess = true);
+        return $this->goBack();
+      }
     }
 
     //if the above steps are not applied offer the registration form

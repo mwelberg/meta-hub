@@ -28,6 +28,10 @@ class RegisterForm extends Model
             [['username', 'email', 'password', 'password_repeat'], 'required'],
             // username is validated by the 'unique' validator
       	    ['username', 'unique', 'targetClass' => '\app\models\BackendUser', 'message' => 'This username is already taken.'],
+            // username must be of type string and of at least 3 and maximum 18 characters length
+            ['username', 'string', 'length' => [3, 18]],
+            // password must have at least 8 characters
+            ['password', 'string', 'min' => 8],
       	    // email address is by the 'unique' validator
       	    ['email', 'unique', 'targetClass' => '\app\models\BackendUser', 'message' => 'This address is already taken.'],
       	    // passwords are validated by this inline comparison

@@ -11,6 +11,12 @@ $this->title = 'Settings';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-settings">
+    <?php
+      foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+        echo '<div class="alert alert-'.$key.'">'.$message.'</div>';
+      }
+    ?>
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Edit the following fields to update your profile:</p>
