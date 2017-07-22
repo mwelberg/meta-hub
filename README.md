@@ -1,14 +1,13 @@
 # meta-hub
 This repository contains a basic website powered by yii framework.
 Some implemented features are:
-* Registration and Login process
-* User descriptions
-* Changes to profile
+* User profiles:
+    * Registration and Login process
+    * User descriptions
+    * Changes to profile
+    * Profile image upload
 
 Some future features are:
-
-* User profiles:
-    * Profile image upload
 
 * Multiple yii-modules:
     * prancing pony (drink list)
@@ -19,5 +18,5 @@ Some future features are:
 ## Installation
 TODO: Add required steps for installing the meta-hub
 
-Before running the meta-hub, a directory ''uploads/images/profile/'' must be created in the project root.
+Before running the meta-hub, a directory ''uploads/'' must be created in the project root.
 User uploaded profile images would not be possible without it.

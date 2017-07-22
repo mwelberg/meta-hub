@@ -4,6 +4,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\ProfileForm;
+use yii\web\UploadedFile;
 
 class ProfileController extends Controller
 {
@@ -35,9 +36,11 @@ class ProfileController extends Controller
        $model = new ProfileForm();
        if ($model->load(Yii::$app->request->post()) && $model->validate())
        {
+         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
          if($model->save()){
            //Settings saved message
            Yii::$app->session->setFlash('success', $value = 'Successfully saved the profile settings.', $removeAfterAccess = true);
+           return $this->redirect(['/profile/settings']);
          }
          else {
            Yii::$app->session->setFlash('danger', $value = 'Error saving the profile settings.', $removeAfterAccess = true);

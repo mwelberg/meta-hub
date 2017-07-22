@@ -4,8 +4,10 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\helpers\Html;
 use app\models\BackendUser;
 use yii\validators\InlineValidator;
+use yii\web\UploadedFile;
 /**
  * RegisterForm is the model behind the registration form.
  *
@@ -20,7 +22,7 @@ class ProfileForm extends Model
     public $password;
     public $password_repeat;
     public $imageFile;
-    public $imageStore = 'uploads/images/profile/';
+    public $imageStore = 'uploads/';
     /**
      * @return array the validation rules.
      */
@@ -51,18 +53,16 @@ class ProfileForm extends Model
             $user = BackendUser::findOne(Yii::$app->user->identity->ID);
             // write description value to the database
             if ($this->description != '')
-              $user->description = $this->description;
+              $user->description = Html::encode($this->description);
             if ($this->password != '')
+              // make sure the password is stored safely
               $user->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
-            //if there is an image file given, process it
-            if (!empty($this->imageFile)){
-              $imagePath = $this->createImagePath($this->imageFile);
-              if ( $imagePath != $imageStore){
-                //save the image file to the upload directory
-                $this->imageFile->saveAs($imagePath);
-                // write image url to database
-                $user->image = $imagePath;
-              }
+            $imagePath = $this->createImagePath($this->imageFile);
+            if ( $imagePath != $this->imageStore){
+              //save the image file to the upload directory
+              $this->imageFile->saveAs($imagePath);
+              // write image url to database
+              $user->image = $imagePath;
             }
             if ($this->email != '')
               $user->email = $this->email;
@@ -78,12 +78,15 @@ class ProfileForm extends Model
      * Validate basename and file extension for user uploaded image file
      */
      public function createImagePath($imageFile){
-       $basePath = $imageStore;
-       if ($imageFile->baseName != '' && $imageFile->extension != '')
+       $basePath = $this->imageStore;
+       if (!empty($imageFile))
        {
-         $basePath .= $imageFile->baseName;
-         $basePath .= '.';
-         $basePath .= $imageFile->extension;
+         if ($imageFile->baseName != '' && $imageFile->extension != '')
+         {
+           $basePath .= $imageFile->baseName;
+           $basePath .= '.';
+           $basePath .= $imageFile->extension;
+         }
        }
        return $basePath;
      }

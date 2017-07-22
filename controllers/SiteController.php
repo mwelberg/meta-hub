@@ -78,7 +78,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['/profile']);
         }
         return $this->render('login', [
             'model' => $model,
@@ -125,15 +125,6 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    /**
-     *	Displays simple message
-     *
-     *	@return string
-     */
-    public function actionSay($message = 'Hello')
-    {
-    	return $this->render('say', ['message' => $message]);
-    }
 
     /**
      *	Adds a form entry

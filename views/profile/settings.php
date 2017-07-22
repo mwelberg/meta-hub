@@ -8,7 +8,6 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'Settings';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-settings">
     <?php
@@ -31,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'options' => ['enctype' => 'multipart/form-data'],
     ]); ?>
 
-        <?= $form->field($model, 'description')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'description')->textarea(['rows' => '6', 'autofocus' => true, 'value' => Html::decode(Yii::$app->user->identity->description)]) ?>
         <?= $form->field($model, 'imageFile')->fileInput() ?>
 	<?= $form->field($model, 'email')->input('email') ?>
         <?= $form->field($model, 'password')->passwordInput() ?>
