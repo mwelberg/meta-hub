@@ -5,6 +5,8 @@ use Yii;
 use yii\web\Controller;
 use app\models\ProfileForm;
 use yii\web\UploadedFile;
+use app\models\BackendUser;
+use yii\data\Pagination;
 
 class ProfileController extends Controller
 {
@@ -53,6 +55,34 @@ class ProfileController extends Controller
      $this->goHome();
    }
 
+   /**
+    * The action to view profiles of users
+    */
+   public function actionOthers()
+   {
+     /**
+      * If the current user is not a guest
+      * he shall be permitted to see other users profiles page
+      */
+     if (!Yii::$app->user->isGuest)
+     {
+       $query = BackendUser::find();
+
+       $pagination = new Pagination([
+            'defaultPageSize' => 2,
+            'totalCount' => $query->count(),
+        ]);
+
+        $users = $query->orderBy('username')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+       return $this->render('others', ['users' => $users, 'pagination' => $pagination]);
+     }
+     $this->goHome();
+
+   }
 }
 
 ?>

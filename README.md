@@ -9,6 +9,9 @@ Some implemented features are:
 
 Some future features are:
 
+* User profiles:
+    * View profiles of other users
+    
 * Multiple yii-modules:
     * prancing pony (drink list)
     * waffle list (todo list)
