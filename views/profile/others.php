@@ -12,7 +12,7 @@ $this->title = 'Meta-Hub';
         <div class="col-lg-6">
           <?php
             if ($user->image)
-              echo '<img class="img-thumbnail" src="'. $user->image .'" alt="profile image">';
+              echo '<img class="img-thumbnail" src="'. $user->image .'" alt="profile image" height="180px" width="180px">';
           ?>
           <h1><?php echo $user->username;?></h1>
           <p class="lead"><?php echo $user->email;?></p>

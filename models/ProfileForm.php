@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use app\models\BackendUser;
 use yii\validators\InlineValidator;
 use yii\web\UploadedFile;
+use yii\imagine\Image;
 /**
  * RegisterForm is the model behind the registration form.
  *
@@ -61,6 +62,8 @@ class ProfileForm extends Model
             if ( $imagePath != $this->imageStore){
               //save the image file to the upload directory
               $this->imageFile->saveAs($imagePath);
+              // resize the image to thunbnail size (all images must be equal of size)
+              Image::thumbnail($imagePath, 180, 180)->save($imagePath);
               // write image url to database
               $user->image = $imagePath;
             }
