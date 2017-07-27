@@ -20,8 +20,7 @@ class ProfileController extends Controller
      * If the current user is not a guest
      * he shall be permitted to see the (his own) profile page
      */
-    if (!Yii::$app->user->isGuest)
-    {
+    if (!Yii::$app->user->isGuest) {
       return $this->render('index');
     }
     $this->goHome();
@@ -33,13 +32,11 @@ class ProfileController extends Controller
    */
    public function actionSettings()
    {
-     if(!Yii::$app->user->isGuest)
-     {
+     if(!Yii::$app->user->isGuest) {
        $model = new ProfileForm();
-       if ($model->load(Yii::$app->request->post()) && $model->validate())
-       {
+       if ($model->load(Yii::$app->request->post()) && $model->validate()) {
          $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-         if($model->save()){
+         if($model->save()) {
            //Settings saved message
            Yii::$app->session->setFlash('success', $value = 'Successfully saved the profile settings.', $removeAfterAccess = true);
            return $this->redirect(['/profile/settings']);
@@ -48,8 +45,7 @@ class ProfileController extends Controller
            Yii::$app->session->setFlash('danger', $value = 'Error saving the profile settings.', $removeAfterAccess = true);
          }
        }
-
-       //if the above steps are not applied offer the registration form
+       //if the above steps are not applied offer the settings form
        return $this->render('settings', ['model' => $model]);
      }
      $this->goHome();
@@ -64,8 +60,7 @@ class ProfileController extends Controller
       * If the current user is not a guest
       * he shall be permitted to see other users profiles page
       */
-     if (!Yii::$app->user->isGuest)
-     {
+     if (!Yii::$app->user->isGuest) {
        $query = BackendUser::find();
 
        $pagination = new Pagination([
@@ -81,7 +76,6 @@ class ProfileController extends Controller
        return $this->render('others', ['users' => $users, 'pagination' => $pagination]);
      }
      $this->goHome();
-
    }
 }
 

@@ -10,7 +10,7 @@ class RegisterController extends Controller
 
   /**
    * The action to register a new user
-   * It has avalidated RegisterForm and a blank new user to wirk with
+   * It has a validated RegisterForm and a blank new user to work with
    */
   public function actionIndex()
   {

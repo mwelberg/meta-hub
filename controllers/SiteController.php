@@ -80,6 +80,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->redirect(['/profile']);
         }
+
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -93,7 +94,6 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
@@ -107,9 +107,9 @@ class SiteController extends Controller
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
-
             return $this->refresh();
         }
+
         return $this->render('contact', [
             'model' => $model,
         ]);
@@ -134,12 +134,11 @@ class SiteController extends Controller
     {
 	    $model = new EntryForm();
 
-	    if ($model->load(Yii::$app->request->post()) && $model->validate())
-	    {
-		//valid data received in $model
-		//do something meaningful here about $model...
-		return $this->render('entry-confirm',['model' => $model]);
-	    } else {
+	    if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    		//valid data received in $model
+    		return $this->render('entry-confirm',['model' => $model]);
+	    }
+      else {
 	    	return $this->render('entry',['model' => $model]);
 	    }
     }

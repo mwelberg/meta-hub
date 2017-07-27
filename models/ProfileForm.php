@@ -59,7 +59,7 @@ class ProfileForm extends Model
               // make sure the password is stored safely
               $user->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
             $imagePath = $this->createImagePath($this->imageFile);
-            if ( $imagePath != $this->imageStore){
+            if ( $imagePath != $this->imageStore) {
               //save the image file to the upload directory
               $this->imageFile->saveAs($imagePath);
               // resize the image to thunbnail size (all images must be equal of size)
@@ -82,14 +82,10 @@ class ProfileForm extends Model
      */
      public function createImagePath($imageFile){
        $basePath = $this->imageStore;
-       if (!empty($imageFile))
-       {
-         if ($imageFile->baseName != '' && $imageFile->extension != '')
-         {
+       if (!empty($imageFile) && $imageFile->baseName != '' && $imageFile->extension != '') {
            $basePath .= $imageFile->baseName;
            $basePath .= '.';
            $basePath .= $imageFile->extension;
-         }
        }
        return $basePath;
      }
