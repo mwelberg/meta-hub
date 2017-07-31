@@ -6,11 +6,12 @@ Some implemented features are:
     * User descriptions
     * Changes to profile
     * Profile image upload
+    * View profiles of other users
 
 Some future features are:
 
 * User profiles:
-    * View profiles of other users
+    * administrator role
 
 * Multiple yii-modules:
     * prancing pony (drink list)
