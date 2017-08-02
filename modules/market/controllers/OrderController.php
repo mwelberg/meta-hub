@@ -1,9 +1,9 @@
 <?php
-namespace app\protected\modules\market\controllers;
+namespace app\modules\market\controllers;
 
 use Yii;
 use yii\web\Controller;
-use app\protected\modules\market\models\ItemForm;
+use app\modules\market\models\OrderForm;
 
 class DashboardController extends Controller
 {

@@ -1,11 +1,11 @@
 <?php
-namespace app\protected\modules\market\controllers;
+namespace app\modules\market\controllers;
 
 use Yii;
 use yii\web\Controller;
-use app\protected\modules\market\models\MarketForm;
+use app\modules\market\models\MarketForm;
 
-class MarketController extends Controller
+class DefaultController extends Controller
 {
   /**
    * The action to load the list of purchasable items
@@ -14,7 +14,8 @@ class MarketController extends Controller
   {
     //only logged in users should be able to see the market
     if(!Yii::$app->user->isGuest) {
-      return $this->render('index');
+      $model = new MarketForm();
+      return $this->render('index', ['model' => $model]);
     }
   }
 

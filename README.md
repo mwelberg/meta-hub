@@ -12,6 +12,7 @@ Some future features are:
 
 * User profiles:
     * administrator role
+    * user credit points
 
 * Multiple yii-modules:
     * prancing pony (drink list)
