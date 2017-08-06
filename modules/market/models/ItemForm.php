@@ -15,6 +15,7 @@ class ItemForm extends Model
 		return [
 			[['name','price'], 'required'],
       ['price', 'number'],
+			['name', 'unique', 'targetClass' => '\app\modules\market\ItemRecord', 'message' => 'This item already exists.'],
 		];
 	}
 }

@@ -12,10 +12,12 @@ Some future features are:
 
 * User profiles:
     * administrator role
-    * user credit points
 
 * Multiple yii-modules:
     * prancing pony (drink list)
+       * user credit points
+       * drink list with buying option
+       * view order(s)
     * waffle list (todo list)
     * score board (for wargames)
     * event calendar

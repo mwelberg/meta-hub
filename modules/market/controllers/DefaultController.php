@@ -3,7 +3,9 @@ namespace app\modules\market\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\data\Pagination;
 use app\modules\market\models\MarketForm;
+use app\modules\market\models\ItemRecord;
 
 class DefaultController extends Controller
 {
@@ -15,7 +17,22 @@ class DefaultController extends Controller
     //only logged in users should be able to see the market
     if(!Yii::$app->user->isGuest) {
       $model = new MarketForm();
-      return $this->render('index', ['model' => $model]);
+      /**
+       * If the current user is not a guest
+       * he shall be permitted to see other users profiles page
+       */
+      $query = ItemRecord::find();
+      $pagination = new Pagination([
+        'defaultPageSize' => 2,
+        'totalCount' => $query->count(),
+      ]);
+
+      $items = $query->orderBy('name')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+
+      return $this->render('index', ['model' => $model, 'items' => $items, 'pagination' => $pagination]);
     }
   }
 
@@ -40,11 +57,25 @@ class DefaultController extends Controller
           return $this->goBack();
         }
       }
+      /**
+       * If the current user is not a guest
+       * he shall be permitted to see other users profiles page
+       */
+      $query = ItemRecord::find();
+      $pagination = new Pagination([
+        'defaultPageSize' => 2,
+        'totalCount' => $query->count(),
+      ]);
+
+      $items = $query->orderBy('name')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
 
       //if the above steps are not applied offer the market view (index) with the market form
-      return $this->render('index', ['model' => $model]);
+      return $this->render('index', ['model' => $model, 'items' => $items, 'pagination' => $pagination]);
     }
-
+    $this->goHome();
   }
 
 
