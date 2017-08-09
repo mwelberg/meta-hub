@@ -10,7 +10,7 @@ use yii\validators\InlineValidator;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 /**
- * RegisterForm is the model behind the registration form.
+ * ProfileForm is the model behind the user settings form.
  *
  * @property User|null $user This property is read-only.
  *

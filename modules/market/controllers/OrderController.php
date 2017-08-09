@@ -5,7 +5,7 @@ use Yii;
 use yii\web\Controller;
 use app\modules\market\models\OrderForm;
 
-class DashboardController extends Controller
+class OrderController extends Controller
 {
   /**
    * The action to load the list of purchased items

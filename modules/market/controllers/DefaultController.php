@@ -9,6 +9,11 @@ use app\modules\market\models\ItemRecord;
 
 class DefaultController extends Controller
 {
+
+  /**
+   * Define the defaultPageSize for pagination objects in this class
+   */
+   private $pageSize = 10;
   /**
    * The action to load the list of purchasable items
    */
@@ -17,13 +22,22 @@ class DefaultController extends Controller
     //only logged in users should be able to see the market
     if(!Yii::$app->user->isGuest) {
       $model = new MarketForm();
-      /**
-       * If the current user is not a guest
-       * he shall be permitted to see other users profiles page
-       */
+       if ($model->load(Yii::$app->request->post()) && $model->validate())
+       {
+         if ($model->select()) {
+           Yii::$app->session->setFlash('success', $value = 'The new order has been successfuly placed.', $removeAfterAccess = true);
+           //TODO:find out how to adequately redirect
+           //TODO: redirect the user to his order/overview
+           //return $this->redirect(['market/order']);
+         }
+         else {
+           Yii::$app->session->setFlash('danger', $value = 'An error occured while placing the order.', $removeAfterAccess = true);
+           return $this->goBack();
+         }
+       }
       $query = ItemRecord::find();
       $pagination = new Pagination([
-        'defaultPageSize' => 2,
+        'defaultPageSize' => $this->pageSize,
         'totalCount' => $query->count(),
       ]);
 
@@ -38,7 +52,7 @@ class DefaultController extends Controller
 
   /**
    * The action to add new items to the order
-   */
+   *
   public function actionMarket()
   {
     //only logged in users should be able to see the market
@@ -57,13 +71,13 @@ class DefaultController extends Controller
           return $this->goBack();
         }
       }
-      /**
+      **
        * If the current user is not a guest
        * he shall be permitted to see other users profiles page
-       */
+       *
       $query = ItemRecord::find();
       $pagination = new Pagination([
-        'defaultPageSize' => 2,
+        'defaultPageSize' => $this->pageSize,
         'totalCount' => $query->count(),
       ]);
 
@@ -77,6 +91,7 @@ class DefaultController extends Controller
     }
     $this->goHome();
   }
+  */
 
 
 }
