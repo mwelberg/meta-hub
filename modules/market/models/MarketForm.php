@@ -1,38 +1,33 @@
 <?php
-
-// TODO: This form might be useless, since the data
-// from the market view will be transferred to the order page
-// where the POST vars will be handled
 namespace app\modules\market\models;
 
 use Yii;
 use yii\base\Model;
+use app\modules\market\models\OrderRecord;
 
 class MarketForm extends Model
 {
-	public $quantity;
-	public $ID;
+	public $item_id;
+	public $user_id;
 
 //TODO: add more restrictions for user input
 	public function rules()
 	{
 		return [
-			['ID', 'number'],
-      ['quantity', 'number'],
+			['item_id', 'number'],
+			['user_id', 'number'],
 		];
 	}
 
-	public function select()
+	public function buy()
 	{
-		//dbOrder = new Order();
-		//oderID = timestamp + user.id
-		//foreach element in array
-		//  id = element.ID;
-		//	quantity = element.quantity;
-		//  dbElement = database.find(ID);
-		//  dbElement.quantity = dbElement.quantity - quantity;
-		//
-		return true;	
-
+    if ($this->validate()) {
+  	  $order = new OrderRecord();
+		  $order->item_id = $this->item_id;
+			$order->user_id = $this->user_id;
+      $order->save();
+      return true;
+    }
+  	return false;
 	}
 }

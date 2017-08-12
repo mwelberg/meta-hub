@@ -17,7 +17,12 @@
     ?>
       <div class="row">
         <div class="col-md-6">
-          <!--TODO: List of drinks with possibility to buy-->
+          <?php
+            foreach ($orders as $order) {
+
+              echo $order->item_id;
+            }
+           ?>
         </div>
       </div>
  </div>
