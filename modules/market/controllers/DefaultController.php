@@ -4,7 +4,7 @@ namespace app\modules\market\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\data\Pagination;
-use app\modules\market\models\MarketForm;
+//use app\modules\market\models\MarketForm;
 use app\modules\market\models\ItemRecord;
 
 class DefaultController extends Controller
@@ -21,9 +21,9 @@ class DefaultController extends Controller
   {
     //only logged in users should be able to see the market
     if(!Yii::$app->user->isGuest) {
-      $model = new MarketForm();
-       if (/*$model->load(Yii::$app->request->post())*/Yii::$app->getRequest()->getQueryParam('item_id') /*&& $model->validate()*/)
-       {
+      //$model = new MarketForm();
+       //if (/*$model->load(Yii::$app->request->post())*/Yii::$app->getRequest()->getQueryParam('item_id') /*&& $model->validate()*/)
+       /*{
          //TODO: This is as unsafe as it can get!! Change ASAP
          $model->item_id = Yii::$app->getRequest()->getQueryParam('item_id');
          $model->user_id = Yii::$app->user->identity->ID;
@@ -37,7 +37,7 @@ class DefaultController extends Controller
            Yii::$app->session->setFlash('danger', $value = 'An error occured while placing the order.', $removeAfterAccess = true);
            return $this->goBack();
          }
-       }
+       }*/
       $query = ItemRecord::find();
       $pagination = new Pagination([
         'defaultPageSize' => $this->pageSize,
@@ -49,7 +49,7 @@ class DefaultController extends Controller
         ->limit($pagination->limit)
         ->all();
 
-      return $this->render('index', ['model' => $model, 'items' => $items, 'pagination' => $pagination]);
+      return $this->render('index', ['items' => $items, 'pagination' => $pagination]);
     }
   }
 }

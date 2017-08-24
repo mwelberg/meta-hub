@@ -43,7 +43,7 @@
          //echo Html::HiddenInput('item_id', $item->ID);
          //echo Html::HiddenInput('user_id', Yii::$app->user->identity->ID);
          //echo '<td>'.$form->field($model, 'quantity')->textInput(['type' => 'number']).'</td>';
-         echo '<td>'.Html::a('Buy', ['/market','item_id' => $item->ID],['class' => 'btn btn-primary', 'name' => 'buy-button']).'</td>';
+         echo '<td>'.Html::a('Buy', ['/market/order','item_id' => $item->ID],['class' => 'btn btn-primary', 'name' => 'buy-button']).'</td>';
        ?>
      </tr>
     <?php
